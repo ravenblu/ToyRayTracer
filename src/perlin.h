@@ -49,6 +49,22 @@ public:
 		return perlin_interp(c, u, v, w);
 	}
 
+	// sum of repeated calls to noise
+	double turb(const point3& p, int depth = 7) const {
+		auto accum = 0.0;
+		auto temp_p = p;
+		auto weight = 1.0;
+
+		for (int i = 0; i < depth; i++) {
+			accum += weight * noise(temp_p);
+			weight *= 0.5;
+			temp_p *= 2;
+		}
+
+		// fabs() is the absolute value function defined in <cmath>
+		return fabs(accum);
+	}
+
 private:
 	static const int point_count = 256;
 	vec3* ranvec;

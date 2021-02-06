@@ -53,7 +53,9 @@ public:
     noise_texture(double sc) : scale(sc) {}
 
     virtual color value(double u, double v, const point3& p) const override {
-        return color(1, 1, 1) * 0.5 * (1.0 + noise.noise(scale * p));
+        //return color(1, 1, 1) * 0.5 * (1.0 + noise.noise(scale * p)); // normal perlin noise only
+        //return color(1, 1, 1) * noise.turb(scale * p); // normal turbulence
+        return color(1, 1, 1) *0.5 * (1 + sin(scale * p.x() + 10 * noise.turb(p))); // controlled turbulence phase using a sine function, resulting in a marble-like texture
     }
 
 public:
