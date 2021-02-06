@@ -1,7 +1,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "../external/stb_image.h"
+#include "stb_image_package.h"
 #include "perlin.h"
 
 class texture {
